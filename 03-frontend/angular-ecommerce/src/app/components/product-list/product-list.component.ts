@@ -11,9 +11,18 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductListComponent implements OnInit {
 
   currentCategoryId: number = 1;
+  previousCategoryId: number = 1;
   currentCategoryName: string = '';
   products: Product[] = [];
   searchMode: boolean = false;
+
+  // properties for pagination
+  pageNumber: number = 1;
+  thePageSize: number = 5;
+  totalElements: number = 0;
+
+  previousKeyword: string = "";
+  
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute) { }
@@ -38,13 +47,17 @@ export class ProductListComponent implements OnInit {
   }
   handleSearchProducts() {
     const keyword: string = this.route.snapshot.paramMap.get('keyword')!;
-    
+
+    // if we have a different keyword than previous then set pageNumber to 1
+    if (this.previousKeyword != keyword) {
+      this.pageNumber = 1;
+    }
+    this.previousKeyword = keyword;
+
+    console.log(`keyword=${keyword}, pageNumber=${this.pageNumber}`);
+
     // now search for products using keyword
-    this.productService.searchProducts(keyword).subscribe(
-      data => {
-        this.products = data;
-      }
-    );
+    this.productService.searchProductListPaginate(this.pageNumber - 1, this.thePageSize, keyword).subscribe(this.processResult());
 
   }
 
@@ -63,11 +76,37 @@ export class ProductListComponent implements OnInit {
       this.currentCategoryName = 'Books';
     }
 
+    // Check if we have a different category id than previous
+    // if we have a different category id than previous set the pageNumber back to 1
+    if (this.previousCategoryId != this.currentCategoryId) {
+      this.pageNumber = 1;
+    }
+
+    this.previousCategoryId = this.currentCategoryId;
+
+    console.log(`currentCategoryId=${this.currentCategoryId}, pageNumber=${this.pageNumber}`);
+
     // now get the products for the given category id
-    this.productService.getProductList(this.currentCategoryId).subscribe(
+    this.productService.getProductListPaginate(this.pageNumber - 1, this.thePageSize, this.currentCategoryId).subscribe(
       data => {
-        this.products = data;
+        this.products = data._embedded.products;
+        this.pageNumber = data.page.number + 1;
+        this.thePageSize = data.page.size;
+        this.totalElements = data.page.totalElements;
       }
     )
+  }
+  updatedPageSize(value: string) {
+    this.thePageSize = +value;
+    this.pageNumber = 1;
+    this.listProducts();
+  }
+  processResult() {
+    return (data: any) => {
+      this.products = data._embedded.products;
+      this.pageNumber = data.page.number + 1;
+      this.thePageSize = data.page.size;
+      this.totalElements = data.page.totalElements;
+    }
   }
 }
