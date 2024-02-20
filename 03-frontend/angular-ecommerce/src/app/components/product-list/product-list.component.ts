@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartItem } from 'src/app/common/cart-item';
 import { Product } from 'src/app/common/product';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -25,6 +27,7 @@ export class ProductListComponent implements OnInit {
   
 
   constructor(private productService: ProductService,
+              private cartService: CartService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -87,14 +90,7 @@ export class ProductListComponent implements OnInit {
     console.log(`currentCategoryId=${this.currentCategoryId}, pageNumber=${this.pageNumber}`);
 
     // now get the products for the given category id
-    this.productService.getProductListPaginate(this.pageNumber - 1, this.thePageSize, this.currentCategoryId).subscribe(
-      data => {
-        this.products = data._embedded.products;
-        this.pageNumber = data.page.number + 1;
-        this.thePageSize = data.page.size;
-        this.totalElements = data.page.totalElements;
-      }
-    )
+    this.productService.getProductListPaginate(this.pageNumber - 1, this.thePageSize, this.currentCategoryId).subscribe(this.processResult());
   }
   updatedPageSize(value: string) {
     this.thePageSize = +value;
@@ -108,5 +104,11 @@ export class ProductListComponent implements OnInit {
       this.thePageSize = data.page.size;
       this.totalElements = data.page.totalElements;
     }
+  }
+  addToCart(product: Product) {
+    console.log(`Adding to cart: ${product.name}, ${product.unitPrice}`);
+
+    const cartItem = new CartItem(product);
+    this.cartService.addToCart(cartItem);
   }
 }
