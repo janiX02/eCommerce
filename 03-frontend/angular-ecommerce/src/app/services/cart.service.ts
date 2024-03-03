@@ -12,7 +12,7 @@ export class CartService {
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
-  //storage: Storage = sessionStorage; //persists data in session tab
+  //storage: Storage = sessionStorage; // persists data in session tab
   storage: Storage = localStorage; // persists data regardless of session state (locally)
 
   constructor() {
