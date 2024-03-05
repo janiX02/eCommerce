@@ -215,7 +215,7 @@ section{
 }
 
 .au-input-xl{
-    min-width:935px
+    min-width:500px
 }
 
 input.au-input.au-input-xl{
@@ -688,7 +688,8 @@ table.table.table-bordered{
     background:#fff
 }
 .table-bordered td,.table-bordered th{
-    border:1px solid #dee2e6
+    border:1px solid #dee2e6;
+    padding: 10px
 }
 table.table.table-bordered th{
     BACKGROUND:#0da8e4;

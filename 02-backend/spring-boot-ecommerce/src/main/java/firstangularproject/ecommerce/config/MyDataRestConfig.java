@@ -1,9 +1,6 @@
 package firstangularproject.ecommerce.config;
 
-import firstangularproject.ecommerce.entity.Country;
-import firstangularproject.ecommerce.entity.Product;
-import firstangularproject.ecommerce.entity.ProductCategory;
-import firstangularproject.ecommerce.entity.State;
+import firstangularproject.ecommerce.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +45,9 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 
         // disable HTTP methods for State: PUT, POST and DELETE
         disableHttpMethods(State.class, config, theUnsupportedActions);
+
+        // disable HTTP methods for Order: PUT, POST and DELETE
+        disableHttpMethods(Order.class, config, theUnsupportedActions);
 
         // call an internal helper method
         exposeIds(config);
