@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  janixShopApiUrl: "http://localhost:8080/api"
+  janixShopApiUrl: "http://localhost:8081/api",
+  stripePublishableKey: "pk_test_51OroT0P0JqavAqDWSYysBDSZUXrBqULWsZ6WrUZHT07PnQdAM0AvmUuLolkgCDHe4m1pjOgmySmbpsc8xwquVySf006goi8d4K"
 };
 
 /*
