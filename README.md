@@ -10,7 +10,7 @@ The primary objective of this project was to enhance my proficiency in developin
 ## About
 The e-commerce web application, designed to emulate real-world e-commerce platforms, offers users the capability to browse and add items from a diverse range of categories to their shopping cart. Users can effortlessly remove items from their cart and proceed to generate a purchase summary and checkout.
 
-For registered users who are signed in, the application provides an additional feature: the ability to access their purchase history. This functionality enables users to review and track their past purchases, enhancing their overall shopping experience and facilitating future transactions.
+For authenticated users (using Okta), the application provides an additional feature: the ability to access their purchase history. This functionality enables users to review and track their past purchases, enhancing their overall shopping experience and facilitating future transactions.
 
 Moreover, the application utilizes Stripe payments, adding an extra layer of realism to the purchasing process by integrating a widely used and trusted payment gateway.
 
@@ -25,6 +25,8 @@ Moreover, the application utilizes Stripe payments, adding an extra layer of rea
 ![Zrzut ekranu 2024-03-27 201423](https://github.com/mikolaj-janik/JaniX-Shop-e-commerce-/assets/127678386/fb91128f-23e8-447d-ac1c-bbb11f410ddd)
 
 ### Checkout Form
+![Zrzut ekranu 2024-03-27 202003](https://github.com/mikolaj-janik/JaniX-Shop-e-commerce-/assets/127678386/a2175ec3-8c2a-4172-acdd-5cd9ba4350b8)
+![Zrzut ekranu 2024-03-27 201816](https://github.com/mikolaj-janik/JaniX-Shop-e-commerce-/assets/127678386/ddf9a42d-2afe-453d-8a29-e5e469d70220)
 
 
 
@@ -33,11 +35,11 @@ Moreover, the application utilizes Stripe payments, adding an extra layer of rea
 
 ## Technologies
 - Java 19
-- Spring Boot 3.1.5
-- Spring Security 6.2.2
+- Spring Boot 
+- Spring Security 
 - Angular
 - MySql
-- Bootstrap 5.2.3
+- Bootstrap 
 - TypeScript
 - Okta
 - Stripe
@@ -70,3 +72,9 @@ Intellij IDEA:
 
 Visual Studio Code:
 - https://code.visualstudio.com/
+
+Okta:
+- https://www.okta.com/
+
+Stripe:
+- https://stripe.com/en-pl
